@@ -25,6 +25,11 @@ jobs:
           source .venv/bin/activate
           pip install kivy plyer requests pycryptodomex ecdsa libsecp256k1
 
+      - name: Accept Android SDK licenses & install build-tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "build-tools;36.1.0" "platforms;android-34"
+
       - name: Init buildozer
         run: |
           buildozer init
